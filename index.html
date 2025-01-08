@@ -2,7 +2,317 @@
 <html>
 <head>
     <title>What Type of Ruler Are You?</title>
+    <style><!DOCTYPE html>
+<html>
+<head>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgb(69, 34, 22);
+            color: white;
+        }
+        #quiz-container {
+            background-color: rgb(69, 34, 22);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .question {
+            margin-bottom: 20px;
+            display: none;
+        }
+        .question.active {
+            display: block;
+        }
+        button {
+            background-color: rgb(251, 240, 221);
+            color: black;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+            width: 100%;
+            max-width: 300px;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        #result {
+            display: none;
+            padding: 20px;
+            background-color: rgb(69, 34, 22);
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .result-section {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .result-title {
+            font-size: 32px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .result-traits {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        .result-description {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .result-battle {
+            font-size: 16px;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+        .result-philosophy {
+            font-size: 18px;
+            text-align: center;
+            font-weight: bold;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+        #intro {
+            line-height: 1.6;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+        #start-button, #retry-button {
+            display: block;
+            margin: 20px auto;
+            font-size: 18px;
+            padding: 15px 30px;
+        }
+        #questions {
+            display: none;
+        }
+        .retry-text {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        h1 {
+            color: rgb(208, 186, 110);
+        }
+        .section-title {
+            color: rgb(208, 186, 110);
+            font-weight: bold;
+        }
+</style>
+</head>
+<body>
+    <div id="quiz-container">
+        <h1>What Type of Ruler Are You?</h1>
+        
+        <div id="intro">
+            You are The Ruler of a big and flourishing Empire covering the entire Northern and Eastern part of India. You also have a small region in the southeastern coast of India which is an prime trade point. An enemy Kingdom is set to occupy that region through attack. You yourself decide to go to this battle with your army as you cannot afford to lose that region. Fight through this 8 day battle and let your choices decide what type of Ruler you are.
+        </div>
+        
+        <button id="start-button">Battle begins!</button>
+
+        <div id="questions">
+            <div class="question active" data-question="1">
+                <h1>Day 1</h1>
+                <h3>When faced with a conflict, what's your first instinct?</h3>
+                <button onclick="answer('Strategist')" style="font-weight: 600">Analyze all possible outcomes</button>
+                <button onclick="answer('Warrior')" style="font-weight: 600">Take immediate action</button>
+                <button onclick="answer('Diplomat')" style="font-weight: 600">Seek peaceful resolution</button>
+                <button onclick="answer('Visionary')" style="font-weight: 600">Consider long-term implications</button>
+            </div>
+            
+            <div class="question" data-question="2">
+                <h1>Day 2</h1>
+                <h3>How do you prefer to lead your people?</h3>
+                <button onclick="answer('Warrior')" style="font-weight: 600">Lead by example from the front</button>
+                <button onclick="answer('Strategist')" style="font-weight: 600">Through careful planning and guidance</button>
+                <button onclick="answer('Visionary')" style="font-weight: 600">By inspiring them with a grand vision</button>
+                <button onclick="answer('Diplomat')" style="font-weight: 600">Through consensus and collaboration</button>
+            </div>
+            
+            <div class="question" data-question="3">
+                <h1>Day 3</h1>
+                <h3>What do you consider your greatest strength?</h3>
+                <button onclick="answer('Strategist')" style="font-weight: 600">Analytical thinking</button>
+                <button onclick="answer('Warrior')" style="font-weight: 600">Personal courage</button>
+                <button onclick="answer('Diplomat')" style="font-weight: 600">Communication skills</button>
+                <button onclick="answer('Visionary')" style="font-weight: 600">Innovation and creativity</button>
+            </div>
+            
+            <div class="question" data-question="4">
+                <h1>Day 4</h1>
+                <h3>How do you handle opposition?</h3>
+                <button onclick="answer('Diplomat')" style="font-weight: 600">Negotiate and find common ground</button>
+                <button onclick="answer('Strategist')" style="font-weight: 600">Outmaneuver them strategically</button>
+                <button onclick="answer('Warrior')" style="font-weight: 600">Confront them directly</button>
+                <button onclick="answer('Visionary')" style="font-weight: 600">Transform it into an opportunity</button>
+            </div>
+            
+            <div class="question" data-question="5">
+                <h1>Day 5</h1>
+                <h3>What's your approach to victory?</h3>
+                <button onclick="answer('Strategist')" style="font-weight: 600">Minimize casualties through clever tactics</button>
+                <button onclick="answer('Warrior')" style="font-weight: 600">Achieve it through strength and valor</button>
+                <button onclick="answer('Diplomat')" style="font-weight: 600">Win hearts and minds</button>
+                <button onclick="answer('Visionary')" style="font-weight: 600">Create lasting change</button>
+            </div>
+            
+            <div class="question" data-question="6">
+                <h1>Day 6</h1>
+                <h3>How do you prepare for challenges?</h3>
+                <button onclick="answer('Strategist')" style="font-weight: 600">Develop multiple contingency plans</button>
+                <button onclick="answer('Warrior')" style="font-weight: 600">Train and strengthen resources</button>
+                <button onclick="answer('Diplomat')" style="font-weight: 600">Build alliances and connections</button>
+                <button onclick="answer('Visionary')" style="font-weight: 600">Innovate and experiment</button>
+            </div>
+            
+            <div class="question" data-question="7">
+                <h1>Day 7</h1>
+                <h3>What legacy do you want to leave?</h3>
+                <button onclick="answer('Visionary')" style="font-weight: 600">A transformed and progressive realm</button>
+                <button onclick="answer('Warrior')" style="font-weight: 600">Tales of legendary victories</button>
+                <button onclick="answer('Diplomat')" style="font-weight: 600">Era of peace and prosperity</button>
+                <button onclick="answer('Strategist')" style="font-weight: 600">Model of efficient governance</button>
+            </div>
+            
+            <div class="question" data-question="8">
+                <h1>Day 8</h1>
+                <h3>How do you make important decisions?</h3>
+                <button onclick="answer('Strategist')" style="font-weight: 600">Through careful analysis of data</button>
+                <button onclick="answer('Warrior')" style="font-weight: 600">Trust your instincts</button>
+                <button onclick="answer('Diplomat')" style="font-weight: 600">Consider all stakeholders</button>
+                <button onclick="answer('Visionary')" style="font-weight: 600">Focus on future impact</button>
+            </div>
+        </div>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        let currentQuestion = 1;
+        let scores = {
+            Strategist: 0,
+            Warrior: 0,
+            Diplomat: 0,
+            Visionary: 0
+        };
+
+        const archetypes = {
+            Strategist: {
+                title: "The Strategist",
+                traits: "Intelligent, Calculative, Adaptive",
+                description: "As The Strategist you thrive on foresight and meticulous planning. Analyzing every possible outcome you craft ingenious tactics, and exploit the enemy's weaknesses. As this type of Ruler you believe that wars are won in the mind before they're fought on the battlefield.",
+                battleExample: "Predicting the enemy's ambush strategy, they lure the opposing forces into a trap and secure a decisive victory.",
+                philosophy: "The best victories are those achieved without unnecessary bloodshed."
+            },
+            Warrior: {
+                title: "The Warrior",
+                traits: "Brave, Charismatic, Fearless",
+                description: "As The Warrior you always lead from the front, inspiring troops with unmatched valor and strength. You rely on sheer force and morale to overpower the enemy. As this type of Ruler you believe that the leader's presence on the battlefield can turn the tide of any conflict.",
+                battleExample: "Personally breaking through the enemy's frontlines, they rally their forces to charge with renewed vigor.",
+                philosophy: "Victory belongs to those with unyielding courage."
+            },
+            Diplomat: {
+                title: "The Diplomat",
+                traits: "Persuasive, Resourceful, Pragmatic",
+                description: "As The Diplomat you prefer negotiation over warfare, seeking alliances or peaceful resolutions whenever possible. Your ability to use your cunning and words weaken the enemy, leveraging political and economic strategies.",
+                battleExample: "Convincing a segment of the enemy's forces to defect or sabotaging their supply chain, leading to a swift surrender.",
+                philosophy: "Wars are won with wisdom, not weapons."
+            },
+            Visionary: {
+                title: "The Visionary",
+                traits: "Ambitious, Inspirational, Forward-Thinking",
+                description: "As The Visionary you fight not just for survival but to shape the future of your empire. You are willing to take calculated risks and innovate to secure long-term dominance. Therefore, your strategies are bold and often unprecedented.",
+                battleExample: "Deploying unconventional tactics such as using new formations, technology, or psychological warfare to outsmart the enemy.",
+                philosophy: "Every battle is a step toward building an eternal legacy."
+            }
+        };
+
+        document.getElementById('start-button').addEventListener('click', function() {
+            this.style.display = 'none';
+            document.getElementById('intro').style.display = 'none';
+            document.getElementById('questions').style.display = 'block';
+        });
+
+        function resetQuiz() {
+            scores = {
+                Strategist: 0,
+                Warrior: 0,
+                Diplomat: 0,
+                Visionary: 0
+            };
+            currentQuestion = 1;
+            document.getElementById('result').style.display = 'none';
+            document.getElementById('intro').style.display = 'block';
+            document.getElementById('start-button').style.display = 'block';
+            document.querySelectorAll('.question').forEach(q => q.classList.remove('active'));
+            document.querySelector('.question[data-question="1"]').classList.add('active');
+        }
+
+        function answer(type) {
+            scores[type]++;
+            if (currentQuestion < 8) {
+                document.querySelector(`.question[data-question="${currentQuestion}"]`).classList.remove('active');
+                currentQuestion++;
+                document.querySelector(`.question[data-question="${currentQuestion}"]`).classList.add('active');
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            const winner = Object.entries(scores).reduce((a, b) => a[1] > b[1] ? a : b)[0];
+            const resultDiv = document.getElementById('result');
+            const questionsDiv = document.getElementById('questions');
+            
+            questionsDiv.style.display = 'none';
+            resultDiv.style.display = 'block';
+            
+            const archetype = archetypes[winner];
+            
+            resultDiv.innerHTML = `
+                <h1>What Type of Ruler Are You?</h1>
+                <div class="result-title">${archetype.title}</div>
+                
+                <div class="result-section">
+                    <div class="result-traits">
+                        <span class="section-title">Traits:</span> ${archetype.traits}
+                    </div>
+                </div>
+                
+                <div class="result-section">
+                    <div class="result-description">
+                        <span class="section-title">Description:</span><br>
+                        ${archetype.description}
+                    </div>
+                </div>
+                
+                <div class="result-section">
+                    <div class="result-battle">
+                        <span class="section-title">Battle Example:</span><br>
+                        ${archetype.battleExample}
+                    </div>
+                </div>
+                
+                <div class="result-section">
+                    <div class="result-philosophy">
+                        "${archetype.philosophy}"
+                    </div>
+                </div>
+
+                <div class="retry-text">Want to explore another possibility?</div>
+                <button id="retry-button" onclick="resetQuiz()">Explore another type</button>
+            `;
+        }
+    </script>
+</body>
+</html>
         body {
             font-family: Arial, sans-serif;
             max-width: 800px;
