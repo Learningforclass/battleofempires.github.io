@@ -26,20 +26,6 @@
     pointer-event: none;
     z-index: 300;
     transform: translateZ(0);
-    
-    &:before {
-      content: "";
-      top: -10rem;
-      left: -10rem;
-      width: calc(100% + 20rem);
-      height: calc(100% + 20rem);
-      z-index: 9999;
-      position: fixed;
-      background-image: url(https://upload.wikimedia.org/wikipedia/commons/5/5c/Image_gaussian_noise_example.png);
-      opacity: 0.15;
-      pointer-events: none;
-      -webkit-animation: noise 1s steps(2) infinite;
-      animation: noise 1s steps(2) infinite;
     }
         }
         .question {
@@ -122,7 +108,7 @@
             font-size: 16px;
         }
         h1 {
-            font-family: Elsie;
+            font-family: Elsie, regular 400;
             color: rgb(208, 186, 110);
         }
         .section-title {
@@ -228,7 +214,7 @@
 
         const archetypes = {
             Strategist: {
-                title: "The Strategist 🧠",
+                title: "The Strategist", &#x1F9E0,
                 traits: "Intelligent, Calculative, Adaptive",
                 description: "As The Strategist you thrive on foresight and meticulous planning. Analyzing every possible outcome you craft ingenious tactics, and exploit the enemy's weaknesses. As this type of Ruler you believe that wars are won in the mind before they're fought on the battlefield.",
                 battleExample: "Predicting the enemy's ambush strategy, they lure the opposing forces into a trap and secure a decisive victory.",
