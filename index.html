@@ -16,6 +16,31 @@
             padding: 20px;
             border-radius: 8px;
             margin-bottom: 20px;
+
+            .grain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    pointer-event: none;
+    z-index: 300;
+    transform: translateZ(0);
+    
+    &:before {
+      content: "";
+      top: -10rem;
+      left: -10rem;
+      width: calc(100% + 20rem);
+      height: calc(100% + 20rem);
+      z-index: 9999;
+      position: fixed;
+      background-image: url(https://upload.wikimedia.org/wikipedia/commons/5/5c/Image_gaussian_noise_example.png);
+      opacity: 0.15;
+      pointer-events: none;
+      -webkit-animation: noise 1s steps(2) infinite;
+      animation: noise 1s steps(2) infinite;
+    }
         }
         .question {
             margin-bottom: 20px;
@@ -97,6 +122,7 @@
             font-size: 16px;
         }
         h1 {
+            font-family: Elsie;
             color: rgb(208, 186, 110);
         }
         .section-title {
@@ -202,28 +228,28 @@
 
         const archetypes = {
             Strategist: {
-                title: "The Strategist",
+                title: "The Strategist 🧠",
                 traits: "Intelligent, Calculative, Adaptive",
                 description: "As The Strategist you thrive on foresight and meticulous planning. Analyzing every possible outcome you craft ingenious tactics, and exploit the enemy's weaknesses. As this type of Ruler you believe that wars are won in the mind before they're fought on the battlefield.",
                 battleExample: "Predicting the enemy's ambush strategy, they lure the opposing forces into a trap and secure a decisive victory.",
                 philosophy: "The best victories are those achieved without unnecessary bloodshed."
             },
             Warrior: {
-                title: "The Warrior",
+                title: "The Warrior ⚔️",
                 traits: "Brave, Charismatic, Fearless",
                 description: "As The Warrior you always lead from the front, inspiring troops with unmatched valor and strength. You rely on sheer force and morale to overpower the enemy. As this type of Ruler you believe that the leader's presence on the battlefield can turn the tide of any conflict.",
                 battleExample: "Personally breaking through the enemy's frontlines, they rally their forces to charge with renewed vigor.",
                 philosophy: "Victory belongs to those with unyielding courage."
             },
             Diplomat: {
-                title: "The Diplomat",
+                title: "The Diplomat 🤝",
                 traits: "Persuasive, Resourceful, Pragmatic",
                 description: "As The Diplomat you prefer negotiation over warfare, seeking alliances or peaceful resolutions whenever possible. Your ability to use your cunning and words weaken the enemy, leveraging political and economic strategies.",
                 battleExample: "Convincing a segment of the enemy's forces to defect or sabotaging their supply chain, leading to a swift surrender.",
                 philosophy: "Wars are won with wisdom, not weapons."
             },
             Visionary: {
-                title: "The Visionary",
+                title: "The Visionary 👁️",
                 traits: "Ambitious, Inspirational, Forward-Thinking",
                 description: "As The Visionary you fight not just for survival but to shape the future of your empire. You are willing to take calculated risks and innovate to secure long-term dominance. Therefore, your strategies are bold and often unprecedented.",
                 battleExample: "Deploying unconventional tactics such as using new formations, technology, or psychological warfare to outsmart the enemy.",
