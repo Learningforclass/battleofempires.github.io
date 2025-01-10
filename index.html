@@ -13,24 +13,28 @@
             background-color: rgb(69, 34, 22);
             color: white;
         }
-        
+
         h1 {
             font-family: 'Elsie', cursive;
+            color: rgb(208, 186, 110);
         }
-        
+
         #quiz-container {
             background-color: rgb(69, 34, 22);
             padding: 20px;
             border-radius: 8px;
             margin-bottom: 20px;
         }
+
         .question {
             margin-bottom: 20px;
             display: none;
         }
+
         .question.active {
             display: block;
         }
+
         button {
             background-color: rgb(251, 240, 221);
             color: black;
@@ -42,9 +46,11 @@
             width: 100%;
             max-width: 300px;
         }
+
         button:hover {
             opacity: 0.9;
         }
+
         #result {
             display: none;
             padding: 20px;
@@ -52,29 +58,35 @@
             border-radius: 8px;
             margin-top: 20px;
         }
+
         .result-section {
             margin-bottom: 20px;
             text-align: left;
         }
+
         .result-title {
             font-size: 32px;
             margin-bottom: 20px;
             text-align: center;
         }
+
         .result-traits {
             font-size: 20px;
             margin-bottom: 15px;
         }
+
         .result-description {
             font-size: 16px;
             line-height: 1.6;
             margin-bottom: 15px;
         }
+
         .result-battle {
             font-size: 16px;
             font-style: italic;
             margin-bottom: 15px;
         }
+
         .result-philosophy {
             font-size: 18px;
             text-align: center;
@@ -84,31 +96,45 @@
             background-color: rgba(255, 255, 255, 0.1);
             border-radius: 4px;
         }
+
         #intro {
             line-height: 1.6;
             font-size: 16px;
             margin-bottom: 30px;
         }
+
         #start-button, #retry-button {
             display: block;
             margin: 20px auto;
             font-size: 18px;
             padding: 15px 30px;
         }
+
         #questions {
             display: none;
         }
+
         .retry-text {
             text-align: center;
             margin-bottom: 10px;
             font-size: 16px;
         }
-        h1 {
-            color: rgb(208, 186, 110);
-        }
+
         .section-title {
             color: rgb(208, 186, 110);
             font-weight: bold;
+        }
+
+        .historical-comparison {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(208, 186, 110, 0.3);
+        }
+
+        .loading {
+            text-align: center;
+            margin: 20px 0;
+            font-style: italic;
         }
     </style>
 </head>
@@ -126,10 +152,10 @@
             <div class="question active" data-question="1">
                 <h1>Day 1</h1>
                 <h3>When faced with a conflict, what's your first instinct?</h3>
-                <button onclick="answer('Strategist')" style="font-weight: 600">Analyze all possible outcomes</button>
-                <button onclick="answer('Warrior')" style="font-weight: 600">Take immediate action</button>
-                <button onclick="answer('Diplomat')" style="font-weight: 600">Seek peaceful resolution</button>
-                <button onclick="answer('Visionary')" style="font-weight: 600">Consider long-term implications</button>
+                <button onclick="answer('Strategist')">Analyze all possible outcomes</button>
+                <button onclick="answer('Warrior')">Take immediate action</button>
+                <button onclick="answer('Diplomat')">Seek peaceful resolution</button>
+                <button onclick="answer('Visionary')">Consider long-term implications</button>
             </div>
             
             <div class="question" data-question="2">
@@ -189,10 +215,10 @@
             <div class="question" data-question="8">
                 <h1>Day 8</h1>
                 <h3>How do you make important decisions?</h3>
-                <button onclick="answer('Strategist')" style="font-weight: 600">Through careful analysis of data</button>
-                <button onclick="answer('Warrior')" style="font-weight: 600">Trust your instincts</button>
-                <button onclick="answer('Diplomat')" style="font-weight: 600">Consider all stakeholders</button>
-                <button onclick="answer('Visionary')" style="font-weight: 600">Focus on future impact</button>
+                <button onclick="answer('Strategist')">Through careful analysis of data</button>
+                <button onclick="answer('Warrior')">Trust your instincts</button>
+                <button onclick="answer('Diplomat')">Consider all stakeholders</button>
+                <button onclick="answer('Visionary')">Focus on future impact</button>
             </div>
         </div>
         <div id="result"></div>
@@ -238,6 +264,35 @@
             }
         };
 
+        async function fetchHistoricalKing(archetype) {
+            try {
+                const response = await fetch(
+                    "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent",
+                    {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${process.env.AIzaSyDV3MQVkUQNDWiyJMGR2eV5XLO_IZJOYmA}`
+                        },
+                        body: JSON.stringify({
+                            contents: [{
+                                parts: [{
+                                    text: `Suggest one famous king/emperor from ancient India (before 1000 AD) who matches the following ruler archetype: ${archetype.title}. 
+                                           Traits: ${archetype.traits}
+                                           Description: ${archetype.description}
+                                           Explain how this king's personality and ruling style matches these characteristics.`
+                                }]
+                            }]
+                        })
+                    }
+                );
+                const data = await response.json();
+                return data.candidates[0].content.parts[0].text;
+            } catch (error) {
+                return "Unable to fetch historical king recommendation at this time.";
+            }
+        }
+
         document.getElementById('start-button').addEventListener('click', function() {
             this.style.display = 'none';
             document.getElementById('intro').style.display = 'none';
@@ -270,7 +325,7 @@
             }
         }
 
-        function showResult() {
+        async function showResult() {
             const winner = Object.entries(scores).reduce((a, b) => a[1] > b[1] ? a : b)[0];
             const resultDiv = document.getElementById('result');
             const questionsDiv = document.getElementById('questions');
@@ -309,9 +364,19 @@
                     </div>
                 </div>
 
+                <div class="historical-comparison">
+                    <h2 class="section-title">Historical Comparison</h2>
+                    <div id="historical-king" class="loading">Finding your historical counterpart...</div>
+                </div>
+
                 <div class="retry-text">Want to explore another possibility?</div>
                 <button id="retry-button" onclick="resetQuiz()">Explore another type</button>
             `;
+
+            // Fetch and display historical king
+            const historicalKing = await fetchHistoricalKing(archetype);
+            document.getElementById('historical-king').innerHTML = historicalKing;
+            document.getElementById('historical-king').classList.remove('loading');
         }
     </script>
 </body>
